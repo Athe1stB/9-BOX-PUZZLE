@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="green">#0b6623</color>
+    <color name="orange">#ff5733</color>
+    <color name="gray">#464646</color>
+    <color name="lightgray">#a9a9a9</color>
+    <color name="blue">#0080fe</color>
+    <color name="yellow">#ffc30b</color>
+    <color name="colorPrimary">#d32f2f</color>
+    <color name="colorPrimaryDark">#9a0007</color>
+    <color name="purple">#4b0082</color>
+    <color name="pink">#ff00ff</color>
+    <color name="fadedyellow">#fcf4a3</color>
+    <color name="colorAccent">#ff6699</color>
+    <color name="lightred">#db4437</color>
+    <color name="red">#da291c</color>
+    <color name="mag3">#10a5f5</color>
+    <color name="mag4">#f5a623</color>
+    <color name="mag5">#ff7d50</color>
+    <color name="mag6">#fc6644</color>
+    <color name="brown">#5d2c04</color>
+    <color name="mag8">#e13a20</color>
+    <color name="mag9">#d93218</color>
+    <color name="mag10">#c03823</color>
+</resources>
