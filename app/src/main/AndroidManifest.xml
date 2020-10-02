@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".afterwin"></activity>
+        <activity android:name=".setDifficulty"
+            android:label="@string/DIFFICULTY">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />
+        </activity>
+
+        <activity android:name=".afterwin" />
         <activity android:name=".rules" />
         <activity android:name=".game" />
         <activity android:name=".info" />
