@@ -22,9 +22,8 @@ import java.util.Random;
 public class solution extends AppCompatActivity {
 
     String recievedpuzzle;
+    Files ob = MainActivity.object;
     int numberOfMoves=0;
-    LinkedHashMap<String, String> map = new LinkedHashMap<>(); //present,next state
-    LinkedHashMap<String, Integer> moves = new LinkedHashMap<>(); //number of moves to solve
     Button sb[][] = new Button[3][3];
     private static final int[] BUTTON_IDS = {R.id.sb1, R.id.sb2, R.id.sb3, R.id.sb4, R.id.sb5, R.id.sb6, R.id.sb7, R.id.sb8, R.id.sb9,};
 
@@ -47,37 +46,7 @@ public class solution extends AppCompatActivity {
 
         int puxx[][] = strToArr(recievedpuzzle);
         rand(puxx);
-      initialize(getApplicationContext());
       check();
-    }
-
-    void initialize(Context context) {
-        try {
-            int i = 0, j, size = 181440, id, hard;
-            int[] difficulty = new int[]{0, 7279, 116088, 181440}; //checks difficulty
-            String[] pattern = new String[size];
-            Random rd = new Random();
-            String input, puzzle, filename;
-            AssetManager am = context.getAssets();
-            InputStream is;
-            BufferedReader br;
-
-            for (j = 1; j < 6; ++j) {
-                filename = "data" + j + ".txt";
-                is = am.open(filename);
-                br = new BufferedReader(new InputStreamReader(is));
-                while ((input = br.readLine()) != null) {
-                    map.put(input.substring(0, 9), input.substring(10, 19));
-                    moves.put(input.substring(0, 9), Integer.parseInt(input.substring(20)));
-                    pattern[i++] = input.substring(0, 9);
-                }
-            }
-
-        }
-        catch (IOException e)
-        {
-            Log.v("unhandled","catch");
-        }
     }
 
     void check(){
@@ -99,7 +68,7 @@ public class solution extends AppCompatActivity {
     }
 
     void recursion(final String puzzle) {
-        if(!puzzle.equals((map.get(puzzle))))
+        if(!puzzle.equals((ob.map.get(puzzle))))
         {
             System.out.println("not equal");
             final Handler handler = new Handler();
@@ -113,7 +82,7 @@ public class solution extends AppCompatActivity {
                     TextView tt = findViewById(R.id.solutionmoveval);
                     String movescount = Integer.toString(numberOfMoves);
                     tt.setText(movescount);
-                    recursion(map.get(puzzle));
+                    recursion(ob.map.get(puzzle));
                 }
             }, 700);
         }
@@ -190,6 +159,6 @@ public class solution extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(),MainMenu.class));
     }
 }

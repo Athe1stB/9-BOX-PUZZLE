@@ -17,6 +17,7 @@ public class setDifficulty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_difficulty);
 
+
         final Button easy,medium,hard;
         easy = findViewById(R.id.easybutton);
         medium = findViewById(R.id.mediumbutton);
@@ -59,8 +60,8 @@ public class setDifficulty extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(setDifficulty.this, "Back Button is being Pressed!", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        Intent i = new Intent(getApplicationContext(),MainMenu.class);
         startActivity(i);
+        finish();
     }
 }

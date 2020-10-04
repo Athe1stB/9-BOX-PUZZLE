@@ -98,5 +98,10 @@
             android:text="NEW GAME"/>
 
     </LinearLayout>
+    <Button
+        android:id="@+id/popupsolution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEE SOLUTION"/>
 
 </LinearLayout>
