@@ -10,6 +10,7 @@
     android:background="@drawable/backroot">
 
     <TextView
+        android:id="@+id/popupmaintext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -19,10 +20,12 @@
         android:textColor="@color/white"/>
 
     <LinearLayout
+        android:id="@+id/t1"
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/popupmovestext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/youwinsent"
@@ -39,32 +42,45 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/t2"
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/popuptimetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time taken: "
+            android:text="Time taken"
             android:layout_marginEnd="4dp"
             android:textColor="@color/white"/>
 
-        <TextView
+        <Chronometer
             android:id="@+id/popuptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TIME"
             android:textColor="@color/white"/>
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/popupresume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESUME"/>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         >
-
+        <Button
+            android:id="@+id/popupexitgame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow"
+            android:layout_margin="8dp"
+            android:text="EXIT"/>
         <Button
             android:id="@+id/popuprestart"
             android:layout_width="wrap_content"

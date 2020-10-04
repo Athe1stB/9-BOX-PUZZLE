@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -15,14 +17,19 @@ public class setDifficulty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_difficulty);
 
-        Button easy,medium,hard;
+        final Button easy,medium,hard;
         easy = findViewById(R.id.easybutton);
         medium = findViewById(R.id.mediumbutton);
         hard = findViewById(R.id.hardbutton);
 
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                easy.setAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 1);
                 startActivity(launchResult);
@@ -32,6 +39,7 @@ public class setDifficulty extends AppCompatActivity {
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                medium.setAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 2);
                 startActivity(launchResult);
@@ -41,6 +49,7 @@ public class setDifficulty extends AppCompatActivity {
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hard.setAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 3);
                 startActivity(launchResult);

@@ -53,7 +53,7 @@
         <TextView
             android:id="@+id/play"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="90dp"
             android:gravity="center"
             android:text="@string/play"
             android:textStyle="bold"
@@ -63,7 +63,6 @@
             android:textColor="@color/white"
             android:padding="8dp"
             />
-
 
     </LinearLayout>
 

@@ -3,26 +3,44 @@ package com.example.a9_box_puzzle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    int c=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 10);
+        myAnim.setInterpolator(interpolator);
+
         final TextView t1 = findViewById(R.id.play);
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                t1.startAnimation(myAnim);
                 Intent i = new Intent(getApplicationContext(),setDifficulty.class);
                 startActivity(i);
             }
@@ -32,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                t2.startAnimation(myAnim);
                 Intent i = new Intent(getApplicationContext(),info.class);
                 startActivity(i);
             }
@@ -40,15 +59,15 @@ public class MainActivity extends AppCompatActivity {
         t3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),afterwin.class);
-                startActivity(i);
+                t3.startAnimation(myAnim);
             }
         });
 
-        TextView t4  = findViewById(R.id.rules);
+        final TextView t4  = findViewById(R.id.rules);
         t4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                t4.startAnimation(myAnim);
                 PopUpClass popUpClass = new PopUpClass();
                 popUpClass.showPopupWindow(v);
             }
@@ -83,4 +102,5 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 }

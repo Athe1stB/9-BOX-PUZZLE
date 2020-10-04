@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-    android:id="@+id/gamescrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,50 +14,14 @@
         android:background="@color/white"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:gravity="end">
+        android:gravity="center">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_toStartOf="@id/bestval"
-                android:padding="8dp"
-                android:text="Best:"/>
-            <TextView
-                android:id="@+id/bestval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:textColor="@color/blue"
-                android:text="@string/n0"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            >
-
-            <Chronometer
-                android:id="@+id/timer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/backroot"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,12 +29,12 @@
                 android:layout_marginBottom="8dp"
                 android:paddingBottom="8dp"
                 android:text="Moves :"
-                android:layout_toStartOf="@id/moveval"
+                android:layout_toStartOf="@id/solutionmoveval"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/purple"
                 android:textSize="20sp"/>
             <TextView
-                android:id="@+id/moveval"
+                android:id="@+id/solutionmoveval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -86,7 +49,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/grid"
+            android:id="@+id/solutiongrid"
             android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,14 +63,14 @@
                 android:background="@color/white"
                 android:layout_weight="1">
                 <Button
-                    android:id="@+id/b1"
+                    android:id="@+id/sb1"
                     style="@style/button"/>
 
                 <Button
-                    android:id="@+id/b2"
+                    android:id="@+id/sb2"
                     style="@style/button" />
                 <Button
-                    android:id="@+id/b3"
+                    android:id="@+id/sb3"
                     style="@style/button"/>
             </LinearLayout>
 
@@ -118,13 +81,13 @@
                 android:background="@color/white"
                 android:layout_weight="1">
                 <Button
-                    android:id="@+id/b4"
+                    android:id="@+id/sb4"
                     style="@style/button"/>
                 <Button
-                    android:id="@+id/b5"
+                    android:id="@+id/sb5"
                     style="@style/button"/>
                 <Button
-                    android:id="@+id/b6"
+                    android:id="@+id/sb6"
                     style="@style/button"/>
             </LinearLayout>
 
@@ -135,57 +98,34 @@
                 android:background="@color/white"
                 android:layout_weight="1">
                 <Button
-                    android:id="@+id/b7"
+                    android:id="@+id/sb7"
                     style="@style/button"/>
                 <Button
-                    android:id="@+id/b8"
+                    android:id="@+id/sb8"
                     style="@style/button"/>
                 <Button
-                    android:id="@+id/b9"
+                    android:id="@+id/sb9"
                     style="@style/button"/>
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/restart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RESTART"
-                android:padding="8dp"
-                android:background="@color/green"
-                android:textColor="@color/white"
-                android:layout_margin="6dp"/>
-            <Button
-                android:id="@+id/seesolution"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SEE SOLUTION"
-                android:padding="8dp"
-                android:background="@color/green"
-                android:textColor="@color/white"
-                android:layout_margin="6dp"
-                />
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content">-->
 
-            <Button
-                android:id="@+id/newgame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="NEW GAME"
-                android:padding="8dp"
-                android:background="@color/green"
-                android:textColor="@color/white"
-                android:layout_margin="6dp"
-                />
-        </LinearLayout>
+        <!--            <Button-->
+        <!--                android:id="@+id/backgame"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/restart"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                />-->
+        <!--        </RelativeLayout>-->
 
     </LinearLayout>
 
