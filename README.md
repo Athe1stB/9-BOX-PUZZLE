@@ -10,5 +10,5 @@ You can only move the block adjacent to the free space vertically or horizontall
 
 In this application, we accept the name of player and host game for him by generating a random puzzle. For every player we calculate the moves in which he completes the puzzle and score accordingly.
 We also have 3 difficulty levels : Easy, Medium , Hard which have been classified on the basis of minimum number of moves required to solve the puzzle.(Since, more number of moves results in greater number of possibilities of states).
-In addition to all these, we also have added a solution window, which shows the solution for the current puzzle. which I call it as AI based solution.
+In addition to all these, we also have added a solution window, which shows the solution for the current puzzle as animation. which I call it as AI based solution.
 Enjoy!
