@@ -36,7 +36,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 t1.startAnimation(myAnim);
-                name = getname.getText().toString();
+                name = getname.getText().toString().toLowerCase();
                 System.out.println(MainActivity.object.current_user);
                 if(MainActivity.object.current_user==null && name.length()==0) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainMenu.this);
