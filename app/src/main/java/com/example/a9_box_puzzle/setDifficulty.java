@@ -30,7 +30,7 @@ public class setDifficulty extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                easy.setAnimation(myAnim);
+                easy.startAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 1);
                 startActivity(launchResult);
@@ -40,7 +40,7 @@ public class setDifficulty extends AppCompatActivity {
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                medium.setAnimation(myAnim);
+                medium.startAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 2);
                 startActivity(launchResult);
@@ -50,7 +50,7 @@ public class setDifficulty extends AppCompatActivity {
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hard.setAnimation(myAnim);
+                hard.startAnimation(myAnim);
                 Intent launchResult = new Intent(getApplicationContext(), game.class);
                 launchResult.putExtra("key", 3);
                 startActivity(launchResult);

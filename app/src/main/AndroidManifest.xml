@@ -30,7 +30,7 @@
                 android:value=".MainMenu" />
         </activity>
         <activity
-            android:name=".afterwin"
+            android:name=".instructions"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity

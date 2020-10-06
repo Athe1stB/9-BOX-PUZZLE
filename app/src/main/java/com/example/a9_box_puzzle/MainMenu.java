@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainMenu extends AppCompatActivity {
@@ -27,7 +29,7 @@ public class MainMenu extends AppCompatActivity {
 
         final EditText getname = findViewById(R.id.getname);
         if(MainActivity.object.current_user!=null)
-        getname.setHint(MainActivity.object.current_user);
+        getname.setHint("Hi "+ MainActivity.object.current_user+" !");
 
         final TextView t1 = findViewById(R.id.play);
         t1.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 t3.startAnimation(myAnim);
+                startActivity(new Intent(getApplicationContext(),instructions.class));
             }
         });
 
@@ -84,6 +87,19 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 t4.startAnimation(myAnim);
                 startActivity(new Intent(getApplicationContext(), performanceActivity.class));
+            }
+        });
+
+        final TextView t5 = findViewById(R.id.feedback);
+        t5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                t5.startAnimation(myAnim);
+                String uritext = "mailto:lbccpvtroup@gmail.com"+"?subject="+ Uri.encode("FEEDBACK REGARDING 9 BOX APP")+"&body="+Uri.encode("FEEDBACK/suggestions/review");
+                Uri uri = Uri.parse(uritext);
+                Intent mail = new Intent(Intent.ACTION_SENDTO);
+                mail.setData(uri);
+                startActivity(Intent.createChooser(mail,"Send FEEDBACK:"));
             }
         });
 

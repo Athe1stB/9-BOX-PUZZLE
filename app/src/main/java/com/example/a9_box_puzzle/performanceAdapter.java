@@ -26,19 +26,6 @@ public class performanceAdapter extends ArrayAdapter<performanceDetails> {
 
         performanceDetails cur = getItem(position);
 
-        if(position==0)
-        {
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.gold));
-        }
-        else if(position==1)
-        {
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.silver));
-        }
-        else if(position==2)
-        {
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.bronze));
-        }
-
         String playername , totalwins, totalscore,totalgamesplayes,rank;
         playername = cur.mPlayerName;
         totalwins = Long.toString(cur.getmTotalWins());

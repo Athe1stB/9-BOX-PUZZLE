@@ -152,7 +152,7 @@ public class solution extends AppCompatActivity {
         {
             for(int j=0; j<3; j++)
             {
-                sb[i][j].setBackgroundColor(getResources().getColor(R.color.green));
+                sb[i][j].setBackgroundResource(R.drawable.green_box_appearance);
             }
         }
     }

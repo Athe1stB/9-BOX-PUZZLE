@@ -16,17 +16,23 @@
     <string name="username">Username: </string>
     <string name="rules">RULES</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="minmoves">Minimum Moves</string>
+    <string name="best">Best:</string>
     <string name="reset">Reset</string>
     <string name="newgame">New Game</string>
     <string name="seesol">See Solution</string>
     <string name="name">Name</string>
     <string name="resume">Resume</string>
     <string name="mainMenu">Main Menu</string>
+    <string name="feedback">Feedback</string>
     <string name="exit">Exit</string>
+    <string name="playername">Player Name</string>
     <string name="hey">Hey Athe1stB !</string>
     <string name="totalscore">Total Score</string>
     <string name="totalwins">Total Wins</string>
     <string name="totalgames">Games Played</string>
+    <string name="unsolved">Unsolved State: </string>
+    <string name="solved">Solved State: </string>
     <string name="instructions">Instructions</string>
     <string name="rank">Rank</string>
     <string name="credits">CREDITS</string>
@@ -34,5 +40,6 @@
     <string name="infopara">The 9 Box puzzle (also called Gem Puzzle, Boss Puzzle, Game of Fifteen, Mystic Square and many others) is a sliding puzzle that consists of a frame of numbered square tiles in random order with one tile missing. The puzzle also exists in other sizes, particularly the larger 16 box puzzle. If the size is 3×3 tiles, the puzzle is called the 8 puzzle or 9 puzzle, and if 4×4 tiles, the puzzle is called the 15 puzzle or 16 puzzle named, respectively, for the number of tiles and the number of spaces.\n\nThe goal of the puzzle is to place the tiles in order by making sliding moves that use the empty space. </string>
     <string name="play">Play!</string>
     <string name="youwin">You Won !!!</string>
+    <string name="instructionstext">Your goal is to rearrange the blocks in ascending order in minimum possible moves\nYou can only move the block adjacent to the free space vertically or horizontally\nEnjoy!</string>
     <string name="youwinsent">You completed the puzzle in </string>
 </resources>

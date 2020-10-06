@@ -80,9 +80,9 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateResults();
+                sol.startAnimation(myAnim);
                 newameandsol=true;
                 moves=0;
-                sol.setAnimation(myAnim);
                 pauseChronometer();
                 Intent sendtosol = new Intent(getApplicationContext(),solution.class);
                 String puzzle="";
@@ -104,6 +104,7 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateResults();
+                newgame.startAnimation(myAnim);
                 newameandsol=true;
                 startActivity(new Intent(getApplicationContext(),setDifficulty.class));
                 finish();
@@ -131,6 +132,7 @@ public class game extends AppCompatActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                restart.startAnimation(myAnim);
                 rand(currentpuzzle);
                 popupopen=false;
                 play();
@@ -261,7 +263,7 @@ public class game extends AppCompatActivity {
         {
             for(int j=0; j<3; j++)
             {
-                 b[i][j].setBackgroundColor(getResources().getColor(R.color.green));
+                 b[i][j].setBackgroundResource(R.drawable.green_box_appearance);
             }
         }
     }
@@ -359,7 +361,7 @@ public class game extends AppCompatActivity {
         myAnim.setInterpolator(interpolator);
 
         //Specify the length and width through constants
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
         //Make Inactive Items Outside Of PopupWindow
@@ -400,12 +402,12 @@ public class game extends AppCompatActivity {
         resumebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resumebutton.startAnimation(myAnim);
                 Button newgame,restart,seesol;
                 newgame = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
                 seesol= findViewById(R.id.seesolution);
                 newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
-                resumebutton.setAnimation(myAnim);
                 startChronometer();
                 popupWindow.dismiss();
                 clearDim(root);
@@ -420,7 +422,7 @@ public class game extends AppCompatActivity {
                 updateResults();
                 popupWindow.dismiss();
                 moves=0;
-                seesolution.setAnimation(myAnim);
+                seesolution.startAnimation(myAnim);
                 pauseChronometer();
                 Intent sendtosol = new Intent(getApplicationContext(),solution.class);
                 String puzzle="";
@@ -442,7 +444,7 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateResults();
-                exitame.setAnimation(myAnim);
+                exitame.startAnimation(myAnim);
                 popupWindow.dismiss();
                 startActivity(new Intent(getApplicationContext(),MainMenu.class));
                 finish();
@@ -456,7 +458,7 @@ public class game extends AppCompatActivity {
                 updateResults();
                 popupWindow.dismiss();
                 clearDim(root);
-                newgame.setAnimation(myAnim);
+                newgame.startAnimation(myAnim);
                 //As an example, display the message
                 Toast.makeText(view.getContext(), "NEW GAME", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),setDifficulty.class);
@@ -475,9 +477,8 @@ public class game extends AppCompatActivity {
                 restart = findViewById(R.id.restart);
                 seesol= findViewById(R.id.seesolution);
                 newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
-                restartButton.setAnimation(myAnim);
+                restartButton.startAnimation(myAnim);
                 clearDim(root);
-                restartButton.setAnimation(myAnim);
                 rand(currentpuzzle);
                 popupWindow.dismiss();
                 startChronometer();

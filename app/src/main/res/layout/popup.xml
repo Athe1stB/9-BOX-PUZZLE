@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     android:id="@+id/popupmenu"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@drawable/backroot">
+    android:background="@drawable/whitecard"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/backroot">
 
     <TextView
         android:id="@+id/popupmaintext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:text="@string/youwin"
         android:fontFamily="@font/luckiest_guy"
-        android:textColor="@color/white"/>
+        android:textColor="@color/yellow"/>
 
     <LinearLayout
         android:id="@+id/t1"
@@ -64,9 +71,9 @@
 
     <Button
         android:id="@+id/popupresume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RESUME"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/playbutton"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -76,32 +83,32 @@
         >
         <Button
             android:id="@+id/popupexitgame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            android:layout_margin="8dp"
-            android:text="EXIT"/>
+            android:layout_width="50sp"
+            android:layout_height="60dp"
+            android:background="@drawable/exitbuttonwhite"
+            android:layout_margin="8dp"/>
         <Button
             android:id="@+id/popuprestart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/restartwhite"
             android:layout_margin="8dp"
-            android:text="RESTART"
             />
         <Button
             android:id="@+id/popupnewgame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
+            android:layout_width="50sp"
+            android:layout_height="60dp"
+            android:background="@drawable/menuwhite"
+            android:layout_margin="8dp"/>
+        <Button
+            android:id="@+id/popupsolution"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="8dp"
-            android:text="NEW GAME"/>
+            android:background="@drawable/lightbulbwhite"/>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/popupsolution"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEE SOLUTION"/>
 
+
+    </LinearLayout>
 </LinearLayout>

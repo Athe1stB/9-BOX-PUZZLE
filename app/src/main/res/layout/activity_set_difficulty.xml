@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wood2"
+    android:background="@drawable/backgroundcanva"
     tools:context=".setDifficulty">
 
     <LinearLayout
@@ -13,33 +13,70 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         >
-        <Button
-            android:id="@+id/easybutton"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:textColor="@color/white"
-            android:text="@string/easy"
-            android:background="@color/mag4"/>
-        <Button
-            android:id="@+id/mediumbutton"
-            android:layout_width="wrap_content"
+            android:background="@color/prussianblue"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/easybutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="12dp"
+                android:textColor="@color/mag4"
+                android:fontFamily="@font/luckiest_guy"
+                android:textSize="50sp"
+                android:text="@string/easy"
+                android:background="@color/white"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:textColor="@color/white"
-            android:text="@string/MEDIUM"
-            android:background="@color/orange"/>
-        <Button
-            android:id="@+id/hardbutton"
-            android:layout_width="wrap_content"
+            android:background="@color/pink"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <Button
+                android:id="@+id/mediumbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/orange"
+                android:textSize="50sp"
+                android:fontFamily="@font/luckiest_guy"
+                android:paddingTop="12dp"
+                android:text="@string/MEDIUM"
+                android:background="@color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:textColor="@color/white"
-            android:text="@string/HARD"
-            android:background="@color/red"/>
+            android:background="@color/prussianblue"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <Button
+                android:id="@+id/hardbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="12dp"
+                android:fontFamily="@font/luckiest_guy"
+                android:textSize="50sp"
+                android:textColor="@color/red"
+                android:text="@string/HARD"
+                android:background="@color/white"/>
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>
