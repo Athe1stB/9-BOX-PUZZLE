@@ -46,8 +46,9 @@ public class game extends AppCompatActivity {
     Boolean newameandsol=false; // to check whether newgame/solution pressed or not
     Button b[][] = new Button[3][3];
     int ar[][] = new int[3][3];
-    int moves=0,paused=0;
+    int moves=0,paused=0,level=0;
     Files ob = MainActivity.object;
+    String puzzle="";
     int currentpuzzle[][] = new int[3][3]; //current puzzle
     PopupWindow popupWindow;
 
@@ -70,7 +71,7 @@ public class game extends AppCompatActivity {
         startChronometer();
 
         Bundle extras = getIntent().getExtras();
-        int level = extras.getInt("key");
+        level = extras.getInt("key");
 
         int idc=0;
 
@@ -78,6 +79,7 @@ public class game extends AppCompatActivity {
         sol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateResults();
                 newameandsol=true;
                 moves=0;
                 sol.setAnimation(myAnim);
@@ -101,6 +103,7 @@ public class game extends AppCompatActivity {
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateResults();
                 newameandsol=true;
                 startActivity(new Intent(getApplicationContext(),setDifficulty.class));
                 finish();
@@ -129,18 +132,12 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rand(currentpuzzle);
-                moves=0;
                 popupopen=false;
-                pauseChronometer();
-                resetChronometer();
-                startChronometer();
-                TextView tttt = findViewById(R.id.moveval);
-                tttt.setText("0");
                 play();
             }
         });
 
-        String puzzle="";
+
         for(int i=0; i<3; i++) {
             for(int j=0; j<3; j++)
             {
@@ -349,7 +346,6 @@ public class game extends AppCompatActivity {
     ViewGroup rootclearDim;
 
     public void showWinPopupWindow(final View view,int flag) {
-
         popupopen=true;
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
@@ -388,23 +384,22 @@ public class game extends AppCompatActivity {
         setCurrentTime(timetext,stopTime);
 
         final Button resumebutton = popupView.findViewById(R.id.popupresume);
+        final Button restartButton = popupView.findViewById(R.id.popuprestart);
 
-        if(flag==0)
-        {
+        if(flag==0) {
             LinearLayout l1 = popupView.findViewById(R.id.t1);
             LinearLayout l2 = popupView.findViewById(R.id.t2);
             maint.setText("PAUSED");
             l1.setVisibility(View.GONE); l2.setVisibility(View.GONE);
         }
-        else
-        {
+        else {
             resumebutton.setVisibility(View.GONE);
+            restartButton.setVisibility(View.GONE);
         }
 
         resumebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Button newgame,restart,seesol;
                 newgame = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
@@ -422,6 +417,8 @@ public class game extends AppCompatActivity {
         seesolution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateResults();
+                popupWindow.dismiss();
                 moves=0;
                 seesolution.setAnimation(myAnim);
                 pauseChronometer();
@@ -444,6 +441,7 @@ public class game extends AppCompatActivity {
         exitame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateResults();
                 exitame.setAnimation(myAnim);
                 popupWindow.dismiss();
                 startActivity(new Intent(getApplicationContext(),MainMenu.class));
@@ -455,6 +453,8 @@ public class game extends AppCompatActivity {
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateResults();
+                popupWindow.dismiss();
                 clearDim(root);
                 newgame.setAnimation(myAnim);
                 //As an example, display the message
@@ -466,11 +466,9 @@ public class game extends AppCompatActivity {
         });
 
         //Handler for clicking on the inactive zone of the window
-        final Button restartButton = popupView.findViewById(R.id.popuprestart);
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paused=0;
                 popupopen=false;
                 Button newgame,restart,seesol;
                 newgame = findViewById(R.id.newgame);
@@ -482,11 +480,7 @@ public class game extends AppCompatActivity {
                 restartButton.setAnimation(myAnim);
                 rand(currentpuzzle);
                 popupWindow.dismiss();
-                moves=0;
-                resetChronometer();
                 startChronometer();
-                TextView tttt = findViewById(R.id.moveval);
-                tttt.setText("0");
                 play();
             }
         });
@@ -562,5 +556,11 @@ public class game extends AppCompatActivity {
         }
 
         super.onPause();
+    }
+
+    void updateResults()
+    {
+        int win; if(havewon())win=1; else win=0;
+        MainActivity.object.performanceUpdate(MainActivity.object.current_user,moves, ob.moves.get(puzzle),0,level,win,getApplicationContext());
     }
 }

@@ -20,7 +20,7 @@ public class Files {
     //				   	total_moves			 0     0    0
     //				   	total_score			 0	   0    0
 
-    String current_user;
+    String current_user = "Athe1stB";
     int difficulty[];
     LinkedHashMap<String, String> map;
     LinkedHashMap<String, Integer> moves;
@@ -34,6 +34,19 @@ public class Files {
         pattern = new String[181440];
         player = new LinkedHashMap<String, int[][]>();
     }
+    public static LinkedHashMap<String, int[][]> sortMap(LinkedHashMap<String, int[][]> map) {
+        List<Map.Entry<String, int[][]>> capitalList = new LinkedList<>(map.entrySet());
+
+        Collections.sort(capitalList, (o1, o2) -> (((o1.getValue()[4][0] + o1.getValue()[4][1] + o1.getValue()[4][2] < o2.getValue()[4][0] + o2.getValue()[4][1] + o2.getValue()[4][2]) ? 1 : (o1.getValue()[4][0] + o1.getValue()[4][1] + o1.getValue()[4][2] > o2.getValue()[4][0] + o2.getValue()[4][1] + o2.getValue()[4][2]) ? -1 : 0)));
+
+        LinkedHashMap<String, int[][]> result = new LinkedHashMap<>();
+        for (Map.Entry<String, int[][]> entry : capitalList)
+        {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
     public void performanceInit(Context context) {
 
         // Run this just once at the beginning of the game
@@ -43,8 +56,9 @@ public class Files {
             if (!pf.exists()) pf.createNewFile();
             BufferedReader br = new BufferedReader(new FileReader(pf));
             String input1, input2[];
-            int i, j, r = 5, c = 3, a[][] = new int[r][c], n;
+            int i, j, r = 5, c = 3, n;
             while ((input1 = br.readLine()) != null) {
+                int a[][] = new int[r][c];
                 for (i = 0; i < r; ++i) {
                     input2 = br.readLine().split(",");
                     for (j = 0; j < c; ++j)
@@ -59,38 +73,49 @@ public class Files {
             System.out.println("lund mera");
         }
     }
-    public void performanceUpdate(String name, int move, int min_move, int time, int hard, int win, Context context) throws Exception {
+    public void performanceUpdate(String name, int move, int min_move, int time, int hard, int win, Context context){
 
 		/*
 		Run this code when:
 			a game is completed
 			solution is viewed
 		*/
-
-        int i, j, r = 5, c = 3, a[][] = new int[r][c];
-        // File pf = new File("performance.txt");
-        File pf = new File(context.getFilesDir()+File.separator+"performance.txt");
-        if(!player.containsKey(name)) {
-            for(i = 0; i < r; ++i) for(j = 0; j < c; ++j) a[i][j] = 0;
-            player.put(name, a);
-        }
-        player.get(name)[0][hard-1] += 1;
-        player.get(name)[1][hard-1] += time;
-        player.get(name)[2][hard-1] += win;
-        if(win == 1) {
-            player.get(name)[3][hard-1] += move;
-            player.get(name)[4][hard-1] += (int)(100.0*min_move/move);
-        }
-        BufferedWriter bw = new BufferedWriter(new FileWriter(pf, false));
-        for(String key: player.keySet()) {
-            bw.write(key + "\n");
-            for(i = 0; i < r; ++i) {
-                for(j = 0; j < c-1; ++j)
-                    bw.write(player.get(key)[i][j] + ",");
-                bw.write(player.get(key)[i][c-1] + "\n");
+        try {
+            int i, j, r = 5, c = 3, a[][] = new int[r][c];
+            // File pf = new File("performance.txt");
+            File pf = new File(context.getFilesDir() + File.separator + "performance.txt");
+            if (!player.containsKey(name)) {
+                for (i = 0; i < r; ++i) for (j = 0; j < c; ++j) a[i][j] = 0;
+                player.put(name, a);
             }
+            player.get(name)[0][hard - 1] += 1;
+            player.get(name)[1][hard - 1] += time;
+            player.get(name)[2][hard - 1] += win;
+            if (win == 1) {
+                player.get(name)[3][hard - 1] += move;
+                double val;
+                if(hard==1)val=20.0;
+                else if(hard==3)val=40.0;
+                else val=60.0;
+                player.get(name)[4][hard - 1] += (int) (val * min_move / move);
+            }
+            player = sortMap(player);
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(pf, false));
+            for (String key : player.keySet()) {
+                bw.write(key + "\n");
+                for (i = 0; i < r; ++i) {
+                    for (j = 0; j < c - 1; ++j)
+                        bw.write(player.get(key)[i][j] + ",");
+                    bw.write(player.get(key)[i][c - 1] + "\n");
+                }
+            }
+            bw.close();
         }
-        bw.close();
+        catch (IOException e)
+        {
+            System.out.println("catch");
+        }
     }
     public void dataInit(Context context){
 
@@ -139,19 +164,24 @@ public class Files {
             System.out.println("lund");
         }
     }
-    public void userUpdate(String name, Context context) throws Exception {
+    public void userUpdate(String name, Context context){
 
 		/*
 		Run this code:
 			everytime new user is added
 			user is changed
 		 */
-
-        current_user = name;
-        // File uf = new File("user.txt");
-        File uf = new File(context.getFilesDir()+File.separator+"user.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(uf, false));
-        bw.write(name);
-        bw.close();
+        try {
+            current_user = name;
+            // File uf = new File("user.txt");
+            File uf = new File(context.getFilesDir() + File.separator + "user.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(uf, false));
+            bw.write(name);
+            bw.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("catch");
+        }
     }
 }

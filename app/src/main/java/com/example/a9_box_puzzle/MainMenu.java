@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainMenu extends AppCompatActivity {
 
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +25,39 @@ public class MainMenu extends AppCompatActivity {
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 10);
         myAnim.setInterpolator(interpolator);
 
+        final EditText getname = findViewById(R.id.getname);
+        if(MainActivity.object.current_user!=null)
+        getname.setHint(MainActivity.object.current_user);
+
         final TextView t1 = findViewById(R.id.play);
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 t1.startAnimation(myAnim);
-                Intent i = new Intent(getApplicationContext(),setDifficulty.class);
-                startActivity(i);
+                name = getname.getText().toString();
+                System.out.println(MainActivity.object.current_user);
+                if(MainActivity.object.current_user==null && name.length()==0) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainMenu.this);
+                    alertDialogBuilder.setTitle("Enter Username !");
+                    alertDialogBuilder
+                            .setCancelable(false)
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+                else {
+                    if (name.length() != 0) {
+                        MainActivity.object.userUpdate(name, getApplicationContext());
+                    }
+                    Intent i = new Intent(getApplicationContext(), setDifficulty.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -42,7 +70,7 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        final TextView t3 = findViewById(R.id.credits);
+        final TextView t3 = findViewById(R.id.howtoplay);
         t3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,8 +83,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 t4.startAnimation(myAnim);
-                PopUpClass popUpClass = new PopUpClass();
-                popUpClass.showPopupWindow(v);
+                startActivity(new Intent(getApplicationContext(), performanceActivity.class));
             }
         });
 

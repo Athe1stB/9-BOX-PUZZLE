@@ -5,65 +5,126 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/backgroundimg"
+android:background="@color/white"
 tools:context=".MainActivity">
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/info"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:paddingEnd="20dp"
+        android:src="@drawable/mainact9box"/>
+    <EditText
+        android:id="@+id/getname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/info"
-        android:background="@color/orange"
-        android:layout_margin="8dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        android:textColorHint="@color/white"
         android:textColor="@color/white"
-        android:padding="8dp"
-        />
-    <TextView
-        android:id="@+id/rules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/rules"
-        android:textStyle="bold"
-        android:background="@color/mag9"
+        android:inputType="text"
+        android:hint="@string/hey"
+        android:cursorVisible="true"
         android:layout_margin="8dp"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        />
-    <TextView
-        android:id="@+id/credits"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/credits"
-        android:textStyle="bold"
-        android:background="@color/colorPrimaryDark"
-        android:layout_margin="8dp"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        />
-    <TextView
-        android:id="@+id/play"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:gravity="center"
-        android:text="@string/play"
-        android:textStyle="bold"
-        android:background="@color/blue"
-        android:layout_margin="8dp"
-        android:textSize="50sp"
-        android:textColor="@color/white"
-        android:padding="8dp"
+        android:padding="4dp"
         />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/pinkcard">
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/info"
+                android:gravity="center"
+                android:background="@drawable/whitecard"
+                android:fontFamily="@font/luckiest_guy"
+                android:textSize="30sp"
+                android:textColor="@color/prussianblue"
+                android:padding="8dp"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/whitecard">
+            <TextView
+                android:id="@+id/rules"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/leaderboard"
+                android:gravity="center"
+                android:fontFamily="@font/luckiest_guy"
+                android:background="@drawable/pinkcard"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:padding="8dp"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/whitecard">
+            <TextView
+                android:id="@+id/howtoplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions"
+                android:fontFamily="@font/luckiest_guy"
+                android:gravity="center"
+                android:background="@drawable/pinkcard"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:padding="8dp"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/whitecard">
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center"
+                android:text="@string/play"
+                android:fontFamily="@font/luckiest_guy"
+                android:background="@drawable/pinkcard"
+                android:textSize="50sp"
+                android:textColor="@color/white"
+                android:padding="8dp"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
 </LinearLayout>
 
 </ScrollView>

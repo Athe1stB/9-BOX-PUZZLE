@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/backgroundimg"
+    android:layout_width="wrap_content"
+    android:padding="8dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
-    <TextView
+    <ImageView
+        android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/purple"
-        android:text="@string/app_name"
-        android:layout_gravity="center"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/luckiest_guy"/>
+        android:padding="18dp"
+        android:src="@drawable/main9box"/>
 
-</ScrollView>
+</LinearLayout>

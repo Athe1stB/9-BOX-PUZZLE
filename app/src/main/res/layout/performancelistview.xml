@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        android:text="@string/n0"/>
+
+    <TextView
+        android:id="@+id/playername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
+        android:fontFamily="@font/aclonica"
+        android:textAllCaps="true"
+        android:text="@string/creator"
+        android:textColor="@color/purple" />
+
+    <LinearLayout
+        android:id="@+id/llts"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Total Score"/>
+        <TextView
+            android:id="@+id/totalscore"
+            android:textStyle="bold"
+            android:fontFamily="@font/luckiest_guy"
+            android:textSize="30sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/blue"
+            android:text="@string/n0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lltw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Total Wins"/>
+        <TextView
+            android:id="@+id/totalwins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:fontFamily="@font/luckiest_guy"
+            android:textSize="30sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/green"
+            android:text="@string/n0"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lltp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Games Played"/>
+        <TextView
+            android:id="@+id/gamesplayed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:fontFamily="@font/luckiest_guy"
+            android:textSize="30sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/orange"
+            android:text="@string/n0"/>
+
+    </LinearLayout>
+
+</LinearLayout>
