@@ -95,7 +95,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 t5.startAnimation(myAnim);
-                String uritext = "mailto:lbccpvtroup@gmail.com"+"?subject="+ Uri.encode("FEEDBACK REGARDING 9 BOX APP")+"&body="+Uri.encode("FEEDBACK/suggestions/review");
+                String uritext = "mailto:lbccpvtgroup@gmail.com"+"?subject="+ Uri.encode("FEEDBACK REGARDING 9 BOX APP")+"&body="+Uri.encode("FEEDBACK/suggestions/review");
                 Uri uri = Uri.parse(uritext);
                 Intent mail = new Intent(Intent.ACTION_SENDTO);
                 mail.setData(uri);
