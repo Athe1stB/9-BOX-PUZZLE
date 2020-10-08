@@ -2,6 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
+        <item>@font/arvo</item>
+        <item>@font/comfortaa_light</item>
+        <item>@font/delius_swash_caps</item>
         <item>@font/ewert</item>
         <item>@font/luckiest_guy</item>
     </array>

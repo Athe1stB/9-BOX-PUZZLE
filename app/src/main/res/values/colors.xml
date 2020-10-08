@@ -29,4 +29,7 @@
     <color name="mag8">#e13a20</color>
     <color name="mag9">#d93218</color>
     <color name="mag10">#c03823</color>
+    <color name="darkgrey">#333333</color>
+    <color name="lipstickred">#d2302c</color>
+    <color name="lightyellow">#fce77d</color>
 </resources>

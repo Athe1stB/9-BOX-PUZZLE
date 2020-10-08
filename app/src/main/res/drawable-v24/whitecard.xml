@@ -3,14 +3,13 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-
     <corners
-        android:radius="8dp" />
+        android:radius="10dp" />
     <gradient
         android:type="radial"
-        android:gradientRadius="50dp"
-        android:startColor="@color/lightred"
-        android:endColor="@color/lightred"
+        android:gradientRadius="300dp"
+        android:startColor="@color/white"
+        android:endColor="@color/white"
         />
 
 </shape>

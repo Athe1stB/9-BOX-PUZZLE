@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/backgroundcanva"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -23,28 +23,17 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:paddingBottom="8dp"
-                android:text="@string/moves"
-                android:layout_toStartOf="@id/solutionmoveval"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/purple"
-                android:textSize="20sp"/>
-            <TextView
+                android:layout_centerHorizontal="true"
                 android:id="@+id/solutionmoveval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:paddingBottom="8dp"
+                android:layout_marginBottom="30dp"
+                android:padding="20dp"
                 android:text="@string/n0"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
                 android:textStyle="bold"
-                android:textColor="@color/red"
-                android:textSize="20sp"/>
-
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:background="@drawable/circle"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -52,7 +41,7 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="20dp"
             android:orientation="vertical">
 
             <LinearLayout

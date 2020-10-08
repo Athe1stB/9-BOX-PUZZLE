@@ -14,7 +14,7 @@
         android:padding="8dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/backroot">
+        android:background="@color/lipstickred">
 
     <TextView
         android:id="@+id/popupmaintext"
@@ -24,7 +24,7 @@
         android:textSize="50sp"
         android:text="@string/youwin"
         android:fontFamily="@font/luckiest_guy"
-        android:textColor="@color/yellow"/>
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:id="@+id/t1"
@@ -73,7 +73,7 @@
         android:id="@+id/popupresume"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/playbutton"/>
+        android:background="@drawable/redplay"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

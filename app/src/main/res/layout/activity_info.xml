@@ -3,19 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bgimg2"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".info">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="16dp">
+        android:padding="40dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/literate"
+            android:lineSpacingExtra="6sp"
             android:text="@string/infopara"
-            android:textSize="20sp"/>
+            android:textAlignment="viewStart"
+            android:textColor="#444444"
+            android:textSize="17sp" />
     </LinearLayout>
 
 </ScrollView>

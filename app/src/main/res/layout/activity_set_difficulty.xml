@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundcanva"
+    android:background="@color/white"
     tools:context=".setDifficulty">
 
     <LinearLayout
@@ -16,9 +16,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/prussianblue"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
 
@@ -28,9 +25,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingTop="12dp"
-                android:textColor="@color/mag4"
+                android:textColor="@color/yellow"
                 android:fontFamily="@font/luckiest_guy"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:text="@string/easy"
                 android:background="@color/white"/>
 
@@ -39,18 +36,15 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pink"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
             <Button
                 android:id="@+id/mediumbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/orange"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:fontFamily="@font/luckiest_guy"
                 android:paddingTop="12dp"
                 android:text="@string/MEDIUM"
@@ -60,9 +54,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/prussianblue"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
             <Button
@@ -72,7 +63,7 @@
                 android:layout_gravity="center"
                 android:paddingTop="12dp"
                 android:fontFamily="@font/luckiest_guy"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:textColor="@color/red"
                 android:text="@string/HARD"
                 android:background="@color/white"/>

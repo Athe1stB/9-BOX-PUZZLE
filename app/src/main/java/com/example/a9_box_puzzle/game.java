@@ -2,7 +2,6 @@ package com.example.a9_box_puzzle;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,7 +10,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
@@ -24,16 +22,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.Random;
-import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -252,7 +241,7 @@ public class game extends AppCompatActivity {
                 }
                 else
                 {
-                    b[i][j].setBackgroundResource(R.drawable.box_apperance);
+                    b[i][j].setBackgroundResource(R.drawable.box_appearance);
                 }
             }
         }
