@@ -151,28 +151,25 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/restart"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/greyreset"
-                    android:layout_margin="30dp"/>
-
-                <Button
-                    android:id="@+id/seesolution"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/greyidea"
-                    android:layout_margin="30dp"
-                    />
-
                 <Button
                     android:id="@+id/newgame"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:background="@drawable/greymenu"
-                    android:layout_margin="30dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/greyback"
+                    android:layout_margin="10dp"
+                    />
+                <Button
+                    android:id="@+id/restart"
+                    android:layout_width="115dp"
+                    android:layout_height="115dp"
+                    android:background="@drawable/greyreset"
+                    android:layout_margin="0dp"/>
+                <Button
+                    android:id="@+id/seesolution"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:background="@drawable/greyidea"
+                    android:layout_margin="0dp"
                     />
             </LinearLayout>
     </LinearLayout>

@@ -51,7 +51,7 @@ public class performanceActivity extends AppCompatActivity {
             HardMoves= MainActivity.object.player.get(key)[3][2];
             HardScore= MainActivity.object.player.get(key)[4][2];
 
-            temp.add(new performanceDetails(key,EasyWins, EasyMoves, EasyScore, EasyGamesPlayed, MediumWins, MediumMoves, MediumScore, MediumGamesPlayed, HardWins, HardMoves, HardScore,  HardGamesPlayed));
+            temp.add(new performanceDetails(key.toLowerCase(),EasyWins, EasyMoves, EasyScore, EasyGamesPlayed, MediumWins, MediumMoves, MediumScore, MediumGamesPlayed, HardWins, HardMoves, HardScore,  HardGamesPlayed));
         }
 
         ListView listview = (ListView) findViewById(R.id.list);

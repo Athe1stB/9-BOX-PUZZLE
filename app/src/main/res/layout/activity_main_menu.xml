@@ -43,10 +43,11 @@ tools:context=".MainActivity">
             android:fontFamily="@font/delius_swash_caps"
             android:hint="@string/name"
             android:inputType="text"
-            android:padding="4dp"
+            android:padding="10dp"
             android:textColor="@color/gray"
             android:textColorHint="@color/gray"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_width="match_parent" />
 
 
     </LinearLayout>
@@ -56,8 +57,8 @@ tools:context=".MainActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingStart="90dp"
-        android:paddingEnd="90dp"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
         android:orientation="vertical">
 
         <FrameLayout
@@ -74,10 +75,10 @@ tools:context=".MainActivity">
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arvo"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:text="@string/play"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="23sp" />
 
         </FrameLayout>
 
@@ -95,10 +96,10 @@ tools:context=".MainActivity">
                 android:background="@drawable/redcard"
                 android:fontFamily="@font/arvo"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:text="@string/instructions"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="23sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -115,10 +116,10 @@ tools:context=".MainActivity">
                 android:background="@drawable/redcard"
                 android:fontFamily="@font/arvo"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:text="@string/leaderboard"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="23sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -135,10 +136,10 @@ tools:context=".MainActivity">
                 android:background="@drawable/redcard"
                 android:fontFamily="@font/arvo"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:text="@string/info"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="23sp" />
 
         </FrameLayout>
 
@@ -156,10 +157,10 @@ tools:context=".MainActivity">
                 android:background="@drawable/redcard"
                 android:fontFamily="@font/arvo"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:text="@string/feedback"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="23sp" />
 
         </FrameLayout>
     </LinearLayout>

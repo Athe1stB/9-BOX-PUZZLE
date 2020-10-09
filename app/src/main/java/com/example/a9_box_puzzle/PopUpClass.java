@@ -28,10 +28,10 @@ public class PopUpClass {
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
         //Make Inactive Items Outside Of PopupWindow
-        boolean focusable = true;
+        boolean focusable = false;
 
         //Create a window with our parameters
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         //Set the location of the window on the screen
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
@@ -53,13 +53,13 @@ public class PopUpClass {
         });
 
         //Handler for clicking on the inactive zone of the window
-        Button restartButton = popupView.findViewById(R.id.popuprestart);
+        /*Button restartButton = popupView.findViewById(R.id.popuprestart);
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
             }
-        });
+        });*/
 
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override

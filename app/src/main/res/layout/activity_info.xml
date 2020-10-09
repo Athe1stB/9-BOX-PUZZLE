@@ -10,17 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="40dp">
+        android:padding="30dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/literate"
-            android:lineSpacingExtra="6sp"
+            android:lineSpacingExtra="4sp"
             android:text="@string/infopara"
             android:textAlignment="viewStart"
             android:textColor="#444444"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
 </ScrollView>

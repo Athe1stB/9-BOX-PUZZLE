@@ -2,6 +2,7 @@ package com.example.a9_box_puzzle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
@@ -22,7 +24,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -375,17 +386,19 @@ public class game extends AppCompatActivity {
         setCurrentTime(timetext,stopTime);
 
         final Button resumebutton = popupView.findViewById(R.id.popupresume);
-        final Button restartButton = popupView.findViewById(R.id.popuprestart);
-
+        final Button solbutton = popupView.findViewById(R.id.popupsolution);
+        final Button newgamebutton = popupView.findViewById(R.id.popupnewgame);
         if(flag==0) {
             LinearLayout l1 = popupView.findViewById(R.id.t1);
             LinearLayout l2 = popupView.findViewById(R.id.t2);
             maint.setText("PAUSED");
-            l1.setVisibility(View.GONE); l2.setVisibility(View.GONE);
+            solbutton.setVisibility(View.GONE);
+            newgamebutton.setVisibility(View.GONE);
+            l1.setVisibility(View.GONE);
+            l2.setVisibility(View.GONE);
         }
         else {
             resumebutton.setVisibility(View.GONE);
-            restartButton.setVisibility(View.GONE);
         }
 
         resumebutton.setOnClickListener(new View.OnClickListener() {
@@ -427,8 +440,7 @@ public class game extends AppCompatActivity {
                 finish();
             }
         });
-
-        final Button exitame = popupView.findViewById(R.id.popupexitgame);
+/*
         exitame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -438,7 +450,7 @@ public class game extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainMenu.class));
                 finish();
             }
-        });
+        });*/
 
         final Button newgame = popupView.findViewById(R.id.popupnewgame);
         newgame.setOnClickListener(new View.OnClickListener() {
@@ -457,7 +469,7 @@ public class game extends AppCompatActivity {
         });
 
         //Handler for clicking on the inactive zone of the window
-        restartButton.setOnClickListener(new View.OnClickListener() {
+        /*restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupopen=false;
@@ -473,7 +485,7 @@ public class game extends AppCompatActivity {
                 startChronometer();
                 play();
             }
-        });
+        });*/
 
     }
 

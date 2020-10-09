@@ -14,37 +14,39 @@
         android:padding="8dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/lipstickred">
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/popupmaintext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="50sp"
-        android:text="@string/youwin"
-        android:fontFamily="@font/luckiest_guy"
-        android:textColor="@color/white"/>
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/popupmaintext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="50sp"
+            android:text="@string/youwin"
+            android:fontFamily="@font/luckiest_guy"
+            android:textColor="@color/lipstickred"/>
+        <LinearLayout
         android:id="@+id/t1"
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
         android:layout_height="wrap_content">
-        <TextView
+            <TextView
             android:id="@+id/popupmovestext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/youwinsent"
             android:layout_marginEnd="4dp"
-            android:textColor="@color/white"/>
+            android:fontFamily="@font/literate"
+            android:textColor="@color/darkgrey"/>
 
         <TextView
             android:id="@+id/popupmoves"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/moves"
-            android:textColor="@color/white"/>
+            android:fontFamily="@font/literate"
+            android:textColor="@color/darkgrey"/>
 
     </LinearLayout>
 
@@ -59,53 +61,43 @@
             android:layout_height="wrap_content"
             android:text="Time taken"
             android:layout_marginEnd="4dp"
-            android:textColor="@color/white"/>
+            android:fontFamily="@font/literate"
+            android:textColor="@color/darkgrey"/>
 
         <Chronometer
             android:id="@+id/popuptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"/>
+            android:fontFamily="@font/literate"
+            android:textColor="@color/darkgrey"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/popupresume"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/redplay"/>
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         >
-        <Button
-            android:id="@+id/popupexitgame"
-            android:layout_width="50sp"
-            android:layout_height="60dp"
-            android:background="@drawable/exitbuttonwhite"
-            android:layout_margin="8dp"/>
-        <Button
-            android:id="@+id/popuprestart"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/restartwhite"
-            android:layout_margin="8dp"
-            />
-        <Button
-            android:id="@+id/popupnewgame"
-            android:layout_width="50sp"
-            android:layout_height="60dp"
-            android:background="@drawable/menuwhite"
-            android:layout_margin="8dp"/>
-        <Button
-            android:id="@+id/popupsolution"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/lightbulbwhite"/>
+            <Button
+                android:layout_margin="15dp"
+                android:id="@+id/popupresume"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:background="@drawable/redplay"/>
+            <Button
+                android:id="@+id/popupnewgame"
+                android:layout_width="95sp"
+                android:layout_height="95dp"
+                android:background="@drawable/redback"
+                android:layout_margin="15dp"/>
+            <Button
+                android:id="@+id/popupsolution"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/redidea"/>
 
     </LinearLayout>
 

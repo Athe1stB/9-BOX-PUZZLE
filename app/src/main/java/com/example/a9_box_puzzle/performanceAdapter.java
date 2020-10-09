@@ -37,7 +37,7 @@ public class performanceAdapter extends ArrayAdapter<performanceDetails> {
         Trank.setText(rank);
 
         TextView name = view.findViewById(R.id.playername);
-        name.setText(playername);
+        name.setText(playername.replaceAll("\\s", "\n"));
 
         TextView Ttotalwins = view.findViewById(R.id.totalwins);
         Ttotalwins.setText(totalwins);
