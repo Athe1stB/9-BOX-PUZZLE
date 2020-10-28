@@ -93,10 +93,7 @@ public class Files {
             player.get(name)[2][hard - 1] += win;
             if (win == 1) {
                 player.get(name)[3][hard - 1] += move;
-                double val;
-                if(hard==1)val=20.0;
-                else if(hard==3)val=40.0;
-                else val=60.0;
+                double val = hard * 20.0;
                 player.get(name)[4][hard - 1] += (int) (val * min_move / move);
             }
             player = sortMap(player);
