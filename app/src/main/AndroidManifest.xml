@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a9_box_puzzle">
+    package="com.lbcc.a9_box_puzzle">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".solution"
+            android:name="com.lbcc.a9_box_puzzle.solution"
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
             <meta-data
@@ -34,7 +34,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".performanceActivity"
+            android:name="com.lbcc.a9_box_puzzle.performanceActivity"
             android:label="@string/leaderboard"
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
@@ -43,7 +43,7 @@
                 android:value=".MainMenu" />
         </activity>
         <activity
-            android:name=".game"
+            android:name="com.lbcc.a9_box_puzzle.game"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
