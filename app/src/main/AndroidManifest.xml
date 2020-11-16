@@ -44,6 +44,7 @@
         </activity>
         <activity
             android:name="com.lbcc.a9_box_puzzle.game"
+            android:label="Good Luck!"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
