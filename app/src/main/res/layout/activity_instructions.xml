@@ -30,9 +30,10 @@
             android:textStyle="bold"
             android:textSize="20sp"/>
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/unsolvedpuzzle"/>
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:padding="10dp"
+            android:src="@drawable/unsolvedpuzzle1"/>
 
         <TextView
         android:layout_width="wrap_content"
@@ -42,9 +43,10 @@
         android:textStyle="bold"
         android:textSize="20sp"/>
         <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/solvedpuzzle"/>
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:padding="12dp"
+        android:src="@drawable/solvedpuzzle1"/>
 
     </LinearLayout>
 
