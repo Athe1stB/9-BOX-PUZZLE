@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,22 +23,28 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        //defining animation
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 10);
         myAnim.setInterpolator(interpolator);
 
+        //player name text field
         final EditText getname = findViewById(R.id.getname);
-        if(MainActivity.object.current_user!=null)
-        getname.setHint("Hi "+ MainActivity.object.current_user+" !");
+        if (MainActivity.object.current_user != null)
+            getname.setHint("Hi " + MainActivity.object.current_user + " !");
 
-        final TextView t1 = findViewById(R.id.play);
-        t1.setOnClickListener(new View.OnClickListener() {
+        final TextView playButton = findViewById(R.id.play);
+        playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t1.startAnimation(myAnim);
+                playButton.startAnimation(myAnim);
+
+                //unique name in leaderboard. so we convert to lowercase.
                 name = getname.getText().toString().toLowerCase();
-                System.out.println(MainActivity.object.current_user);
-                if(MainActivity.object.current_user==null && name.length()==0) {
+
+                //Before proceeding to start the game check if there is a current user playing (or a new user is trying to register by writing his name).
+                //If both the cases not satisfying then its an error and we will show dialog box to enter name.
+                if (MainActivity.object.current_user == null && name.length() == 0) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainMenu.this);
                     alertDialogBuilder.setTitle("Enter Username !");
                     alertDialogBuilder
@@ -51,54 +58,52 @@ public class MainMenu extends AppCompatActivity {
 
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
-                }
-                else {
+                } else {
                     if (name.length() != 0) {
                         MainActivity.object.userUpdate(name, getApplicationContext());
                     }
-                    Intent i = new Intent(getApplicationContext(), setDifficulty.class);
-                    startActivity(i);
+                    startActivity(new Intent(getApplicationContext(), setDifficulty.class));
                 }
             }
         });
 
-        final TextView t2 = findViewById(R.id.info);
-        t2.setOnClickListener(new View.OnClickListener() {
+        final TextView infoButton = findViewById(R.id.info);
+        infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t2.startAnimation(myAnim);
-                Intent i = new Intent(getApplicationContext(),info.class);
-                startActivity(i);
-            }
-        });
-        final TextView t3 = findViewById(R.id.howtoplay);
-        t3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                t3.startAnimation(myAnim);
-                startActivity(new Intent(getApplicationContext(),instructions.class));
+                infoButton.startAnimation(myAnim);
+                startActivity(new Intent(getApplicationContext(), info.class));
             }
         });
 
-        final TextView t4  = findViewById(R.id.rules);
-        t4.setOnClickListener(new View.OnClickListener() {
+        final TextView howToPlayButton = findViewById(R.id.howtoplay);
+        howToPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t4.startAnimation(myAnim);
+                howToPlayButton.startAnimation(myAnim);
+                startActivity(new Intent(getApplicationContext(), instructions.class));
+            }
+        });
+
+        final TextView rulesButton = findViewById(R.id.rules);
+        rulesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rulesButton.startAnimation(myAnim);
                 startActivity(new Intent(getApplicationContext(), performanceActivity.class));
             }
         });
 
-        final TextView t5 = findViewById(R.id.feedback);
-        t5.setOnClickListener(new View.OnClickListener() {
+        final TextView feedbackButton = findViewById(R.id.feedback);
+        feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t5.startAnimation(myAnim);
-                String uritext = "mailto:lbccpvtgroup@gmail.com"+"?subject="+ Uri.encode("FEEDBACK REGARDING 9 BOX APP")+"&body="+Uri.encode("FEEDBACK/suggestions/review");
+                feedbackButton.startAnimation(myAnim);
+                String uritext = "mailto:lbccpvtgroup@gmail.com" + "?subject=" + Uri.encode("FEEDBACK REGARDING 9 BOX APP") + "&body=" + Uri.encode("FEEDBACK/suggestions/review");
                 Uri uri = Uri.parse(uritext);
                 Intent mail = new Intent(Intent.ACTION_SENDTO);
                 mail.setData(uri);
-                startActivity(Intent.createChooser(mail,"Send FEEDBACK:"));
+                startActivity(Intent.createChooser(mail, "Send FEEDBACK:"));
             }
         });
 
@@ -115,15 +120,17 @@ public class MainMenu extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                                homeIntent.addCategory(Intent.CATEGORY_HOME);
                                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(homeIntent);
+
+//                                android.os.Process.killProcess(android.os.Process.myPid());
+//                                System.exit(0);
                             }
                         })
 
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                         dialog.cancel();
                     }
                 });

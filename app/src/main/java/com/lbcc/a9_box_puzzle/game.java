@@ -26,19 +26,20 @@ import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.widget.Button;
 
 public class game extends AppCompatActivity {
 
-    Boolean popupopen=false; //check state of popup(open or close)
-    Boolean newameandsol=false; // to check whether newgame/solution pressed or not
-    Button b[][] = new Button[3][3];
-    int ar[][] = new int[3][3];
-    int moves=0,paused=0,level=0;
+    Boolean isPopUpOpen = false; //check state of popup(open or close)
+    Boolean isNewgameOrSolutionPressed = false; // to check whether newGameButton/solution pressed or not
+    Button[][] b = new Button[3][3];//these buttons make up the screen
+    int moves = 0;
+    int level = 0;//easy,medium,hard (1,2,3 respectively)
     Files ob = MainActivity.object;
-    String puzzle="";
-    int currentpuzzle[][] = new int[3][3]; //current puzzle
+    String puzzle = "";
+    int[][] currentPuzzle = new int[3][3]; //current puzzle
     PopupWindow popupWindow;
 
 
@@ -55,65 +56,63 @@ public class game extends AppCompatActivity {
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 10);
         myAnim.setInterpolator(interpolator);
 
-        stopTime=0;
-        chronometer = (Chronometer)findViewById(R.id.timer);
+        stopTime = 0;
+        chronometer = (Chronometer) findViewById(R.id.timer);
         startChronometer();
 
+        //to fetch difficulty level from sent intent(from setdifficulty.class)
         Bundle extras = getIntent().getExtras();
         level = extras.getInt("key");
-
-        int idc=0;
-
-        final Button sol = findViewById(R.id.seesolution);
-        sol.setOnClickListener(new View.OnClickListener() {
+        
+        final Button seeSolutionButton = findViewById(R.id.seesolution);
+        seeSolutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateResults();
-                sol.startAnimation(myAnim);
-                newameandsol=true;
-                moves=0;
+                updateResults(); //looking solution means either you gave up or you have won and looking for the best solution. which updates results terminating your ranked gameplay.
+                seeSolutionButton.startAnimation(myAnim);
+                isNewgameOrSolutionPressed = true;
+                moves = 0;
                 pauseChronometer();
-                Intent sendtosol = new Intent(getApplicationContext(),solution.class);
-                String puzzle="";
-                for(int i=0; i<3; i++) {
-                    for(int j=0; j<3; j++)
-                    {
-                        puzzle = puzzle+ Integer.toString(currentpuzzle[i][j]);
+                Intent sendtosol = new Intent(getApplicationContext(), solution.class);
+                String puzzle = ""; //retrieving the current puzzle
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        puzzle = puzzle + Integer.toString(currentPuzzle[i][j]);
                     }
                 }
                 System.out.println(puzzle);
-                sendtosol.putExtra("key",puzzle);
+                sendtosol.putExtra("key", puzzle);
                 startActivity(sendtosol);
                 finish();
             }
         });
 
-        Button newgame = findViewById(R.id.newgame);
-        newgame.setOnClickListener(new View.OnClickListener() {
+        Button newGameButton = findViewById(R.id.newgame);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateResults();
-                newgame.startAnimation(myAnim);
-                newameandsol=true;
-                startActivity(new Intent(getApplicationContext(),setDifficulty.class));
+                newGameButton.startAnimation(myAnim);
+                isNewgameOrSolutionPressed = true;
+                startActivity(new Intent(getApplicationContext(), setDifficulty.class));
                 finish();
             }
         });
 
-        for(int i=0; i<3; i++) {
-            for(int j=0; j<3; j++)
-            {
-                b[i][j]=(Button) findViewById(BUTTON_IDS[idc]); idc++;
+        int buttonCounter=0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                b[i][j] = (Button) findViewById(BUTTON_IDS[buttonCounter]);
+                buttonCounter++;
             }
         }
 
-        //check(getApplicationContext());
-        int getpuzzle[][] = create(getApplicationContext(),level);
+        //create puzzle with the desired level
+        int[][] getpuzzle = create(level);
 
-        for(int i=0; i<3; i++) {
-            for(int j=0; j<3; j++)
-            {
-                currentpuzzle[i][j]=getpuzzle[i][j];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                currentPuzzle[i][j] = getpuzzle[i][j];
             }
         } //current puzzle
 
@@ -122,23 +121,22 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 restart.startAnimation(myAnim);
-                rand(currentpuzzle);
-                popupopen=false;
+                rand(currentPuzzle);
+                isPopUpOpen = false;
                 play();
             }
         });
 
 
-        for(int i=0; i<3; i++) {
-            for(int j=0; j<3; j++)
-            {
-                puzzle = puzzle+ Integer.toString(currentpuzzle[i][j]);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                puzzle = puzzle + Integer.toString(currentPuzzle[i][j]);
             }
         }
         System.out.println(puzzle);
 
         TextView bestval = findViewById(R.id.bestval);
-        String temp = " "+ ob.moves.get(puzzle);
+        String temp = " " + ob.moves.get(puzzle);
         bestval.setText(temp);
 
         rand(getpuzzle);
@@ -146,34 +144,28 @@ public class game extends AppCompatActivity {
     }
 
     void play() {
-        if(!havewon())//gamestate=false
+        if (!havewon())//gamestate=false
         {
-            for(int i=0; i<3; i++)
-            {
-                for(int j=0; j<3; j++)
-                {
-                    final int chi=i,chj=j;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    final int chi = i, chj = j;
                     b[i][j].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                           if(isvalidmove(chi,chj))
-                           {
-                               play();
-                           }
+                            if (isvalidmove(chi, chj)) {
+                                play();
+                            }
                         }
                     });
                 }
             }
-        }
-        else
-        {
+        } else {
             setDColor();
             pauseChronometer();
             Toast msg = Toast.makeText(getApplicationContext(), "Hurray!! You WON!!", Toast.LENGTH_SHORT);
             msg.show();
-            for(int i=0; i<3; i++) {
-                for(int j=0; j<3; j++)
-                {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
                     b[i][j].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -183,11 +175,13 @@ public class game extends AppCompatActivity {
                 }
             } //seize grid;
 
-            Button newgame,restart,seesol;
-            newgame = findViewById(R.id.newgame);
+            Button newGameButton, restart, seesol;
+            newGameButton = findViewById(R.id.newgame);
             restart = findViewById(R.id.restart);
-            seesol= findViewById(R.id.seesolution);
-            newgame.setVisibility(View.GONE); restart.setVisibility(View.GONE); seesol.setVisibility(View.GONE);
+            seesol = findViewById(R.id.seesolution);
+            newGameButton.setVisibility(View.GONE);
+            restart.setVisibility(View.GONE);
+            seesol.setVisibility(View.GONE);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -204,18 +198,15 @@ public class game extends AppCompatActivity {
     }
 
     boolean isvalidmove(int x, int y) {
-        int iposs[] = {0,-1,0,1};
-        int jposs[] = {-1,0,1,0};
-        for(int k=0; k<4; k++)
-        {
-            int X = x+iposs[k];
-            int Y = y+jposs[k];
+        int[] iposs = {0, -1, 0, 1};
+        int[] jposs = {-1, 0, 1, 0};
+        for (int k = 0; k < 4; k++) {
+            int X = x + iposs[k];
+            int Y = y + jposs[k];
 
-            if(X<3 && X>=0 && Y>=0 && Y<3)
-            {
+            if (X < 3 && X >= 0 && Y >= 0 && Y < 3) {
                 String s = b[X][Y].getText().toString();
-                if(s.compareTo(" ")==0)
-                {
+                if (s.compareTo(" ") == 0) {
                     b[X][Y].setText(b[x][y].getText().toString());
                     b[x][y].setText(" ");
                     setColor();
@@ -230,17 +221,13 @@ public class game extends AppCompatActivity {
     }
 
     void setColor() {
-        for(int i=0; i<3; i++)
-        {
-            for(int j=0; j<3; j++)
-            {
-                String s; s = b[i][j].getText().toString();
-                if(s.compareToIgnoreCase(" ")==0)
-                {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String s;
+                s = b[i][j].getText().toString();
+                if (s.compareToIgnoreCase(" ") == 0) {
                     b[i][j].setBackgroundColor(getResources().getColor(R.color.white));
-                }
-                else
-                {
+                } else {
                     b[i][j].setBackgroundResource(R.drawable.box_appearance);
                 }
             }
@@ -248,26 +235,22 @@ public class game extends AppCompatActivity {
     }
 
     void setDColor() {
-        for(int i=0; i<3; i++)
-        {
-            for(int j=0; j<3; j++)
-            {
-                 b[i][j].setBackgroundResource(R.drawable.green_box_appearance);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                b[i][j].setBackgroundResource(R.drawable.green_box_appearance);
             }
         }
     }
 
     boolean havewon() {
-        int c=1;
-        for(int i=0; i<3; i++)
-        {
-            for(int j=0; j<3; j++)
-            {
-                if(c==9)break;
-                String s,s1; s= b[i][j].getText().toString();
-                s1=Integer.toString(c);
-                if(s.compareToIgnoreCase(s1)!=0)
-                {
+        int c = 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (c == 9) break;
+                String s, s1;
+                s = b[i][j].getText().toString();
+                s1 = Integer.toString(c);
+                if (s.compareToIgnoreCase(s1) != 0) {
                     return false;
                 }
                 c++;
@@ -278,66 +261,57 @@ public class game extends AppCompatActivity {
         return true;
     }
 
+    //implements puzzle to buttons
     void rand(int[][] puzzle) {
-
-        for(int i=0; i<3; i++)
-        {
-            for(int j=0; j<3; j++)
-            {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 String s = Integer.toString(puzzle[i][j]);
-                if(s.compareToIgnoreCase("9")==0)s=" ";
+                if (s.compareToIgnoreCase("9") == 0) s = " ";
                 b[i][j].setText(s);
             }
         }
         setColor();
-    } //implements puzzle to buttons
+    }
 
     public static void print(String s) {
-        for(int i = 0; i < 9; ++i) {
-            if(s.charAt(i) == '9') System.out.print("  ");
+        for (int i = 0; i < 9; ++i) {
+            if (s.charAt(i) == '9') System.out.print("  ");
             else System.out.print(s.charAt(i) + " ");
-            if(i%3==2) System.out.println();
+            if (i % 3 == 2) System.out.println();
         }
         System.out.println();
     }
 
     public static int[][] strToArr(String s) {
         int[][] a = new int[3][3];
-        for(int i = 0; i < 3; ++i)
-            for(int j = 0; j < 3; ++j)
-                a[i][j] = s.charAt(3*i+j)-48;
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                a[i][j] = s.charAt(3 * i + j) - 48;
         return a;
     }
 
-    int[][] create(Context context, int level) {
+    //creates new puzzle from given difficulty level
+    int[][] create(int level) {
 
-            int i = 0, j, size = 181440, id=0 , hard;
+        int id=0; // puzzle id (initial state)
 
-            Random rd = new Random();
+        Random rd = new Random();
+        while (id == 0) {
+            id = rd.nextInt(ob.difficulty[level] - ob.difficulty[level - 1]) + ob.difficulty[level - 1];
+        }
+        String puzzle = ob.pattern[id];
 
-            // hard = 1 Easy, 2 Medium, 3 Hard
-
-            hard = level;
-            while(id==0) {
-                id = rd.nextInt(ob.difficulty[hard] - ob.difficulty[hard - 1]) + ob.difficulty[hard - 1];
-            }
-           //id = puzzle identity (initial state)
-            String puzzle = ob.pattern[id];
-
-            int arr[][] = strToArr(puzzle);
-
-            return arr;
-
-    } //generate puzzle
+        return strToArr(puzzle);
+    }
 
     void aftersleep(View v) {
-       showWinPopupWindow(v,1);
-   }
+        showWinPopupWindow(v, 1);
+    }
 
     ViewGroup rootclearDim;
 
-    public void showWinPopupWindow(final View view,int flag) {
-        popupopen=true;
+    public void showWinPopupWindow(final View view, int flag) {
+        isPopUpOpen = true;
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.popup, null);
@@ -368,25 +342,24 @@ public class game extends AppCompatActivity {
         TextView maint = popupView.findViewById(R.id.popupmaintext);
 
         TextView movestext = popupView.findViewById(R.id.popupmoves);
-        String s = moves+" Moves";
+        String s = moves + " Moves";
         movestext.setText(s);
 
         Chronometer timetext = popupView.findViewById(R.id.popuptime);
-        setCurrentTime(timetext,stopTime);
+        setCurrentTime(timetext, stopTime);
 
         final Button resumebutton = popupView.findViewById(R.id.popupresume);
         final Button solbutton = popupView.findViewById(R.id.popupsolution);
-        final Button newgamebutton = popupView.findViewById(R.id.popupnewgame);
-        if(flag==0) {
+        final Button newGameButtonbutton = popupView.findViewById(R.id.popupnewgame);
+        if (flag == 0) {
             LinearLayout l1 = popupView.findViewById(R.id.t1);
             LinearLayout l2 = popupView.findViewById(R.id.t2);
             maint.setText("PAUSED");
             solbutton.setVisibility(View.GONE);
-            newgamebutton.setVisibility(View.GONE);
+            newGameButtonbutton.setVisibility(View.GONE);
             l1.setVisibility(View.GONE);
             l2.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             resumebutton.setVisibility(View.GONE);
         }
 
@@ -394,15 +367,17 @@ public class game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resumebutton.startAnimation(myAnim);
-                Button newgame,restart,seesol;
-                newgame = findViewById(R.id.newgame);
+                Button newGameButton, restart, seesol;
+                newGameButton = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
-                seesol= findViewById(R.id.seesolution);
-                newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
+                seesol = findViewById(R.id.seesolution);
+                newGameButton.setVisibility(View.VISIBLE);
+                restart.setVisibility(View.VISIBLE);
+                seesol.setVisibility(View.VISIBLE);
                 startChronometer();
                 popupWindow.dismiss();
                 clearDim(root);
-                popupopen=false;
+                isPopUpOpen = false;
             }
         });
 
@@ -412,19 +387,18 @@ public class game extends AppCompatActivity {
             public void onClick(View v) {
                 updateResults();
                 popupWindow.dismiss();
-                moves=0;
+                moves = 0;
                 seesolution.startAnimation(myAnim);
                 pauseChronometer();
-                Intent sendtosol = new Intent(getApplicationContext(),solution.class);
-                String puzzle="";
-                for(int i=0; i<3; i++) {
-                    for(int j=0; j<3; j++)
-                    {
-                        puzzle = puzzle+ Integer.toString(currentpuzzle[i][j]);
+                Intent sendtosol = new Intent(getApplicationContext(), solution.class);
+                String puzzle = "";
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        puzzle = puzzle + Integer.toString(currentPuzzle[i][j]);
                     }
                 }
                 System.out.println(puzzle);
-                sendtosol.putExtra("key",puzzle);
+                sendtosol.putExtra("key", puzzle);
                 startActivity(sendtosol);
                 finish();
             }
@@ -441,17 +415,17 @@ public class game extends AppCompatActivity {
             }
         });*/
 
-        final Button newgame = popupView.findViewById(R.id.popupnewgame);
-        newgame.setOnClickListener(new View.OnClickListener() {
+        final Button newGameButton = popupView.findViewById(R.id.popupnewgame);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateResults();
                 popupWindow.dismiss();
                 clearDim(root);
-                newgame.startAnimation(myAnim);
+                newGameButton.startAnimation(myAnim);
                 //As an example, display the message
                 Toast.makeText(view.getContext(), "NEW GAME", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(),setDifficulty.class);
+                Intent i = new Intent(getApplicationContext(), setDifficulty.class);
                 startActivity(i);
                 finish();
             }
@@ -461,15 +435,15 @@ public class game extends AppCompatActivity {
         /*restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupopen=false;
-                Button newgame,restart,seesol;
-                newgame = findViewById(R.id.newgame);
+                isPopUpOpen=false;
+                Button newGameButton,restart,seesol;
+                newGameButton = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
                 seesol= findViewById(R.id.seesolution);
-                newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
+                newGameButton.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
                 restartButton.startAnimation(myAnim);
                 clearDim(root);
-                rand(currentpuzzle);
+                rand(currentPuzzle);
                 popupWindow.dismiss();
                 startChronometer();
                 play();
@@ -478,7 +452,7 @@ public class game extends AppCompatActivity {
 
     }
 
-    public static void applyDim(@NonNull ViewGroup parent, float dimAmount){
+    public static void applyDim(@NonNull ViewGroup parent, float dimAmount) {
         Drawable dim = new ColorDrawable(Color.BLACK);
         dim.setBounds(0, 0, parent.getWidth(), parent.getHeight());
         dim.setAlpha((int) (255 * dimAmount));
@@ -495,39 +469,44 @@ public class game extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         ScrollView v = findViewById(R.id.gamescrollview);
-        if(!havewon()) {
-            if (!popupopen) {
+        if (!havewon()) {
+            if (!isPopUpOpen) {
                 pauseChronometer();
-                Button newgame,restart,seesol;
-                newgame = findViewById(R.id.newgame);
+                Button newGameButton, restart, seesol;
+                newGameButton = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
-                seesol= findViewById(R.id.seesolution);
-                newgame.setVisibility(View.GONE); restart.setVisibility(View.GONE); seesol.setVisibility(View.GONE);
+                seesol = findViewById(R.id.seesolution);
+                newGameButton.setVisibility(View.GONE);
+                restart.setVisibility(View.GONE);
+                seesol.setVisibility(View.GONE);
                 showWinPopupWindow(v, 0);
             } else {
-                Button newgame,restart,seesol;
-                newgame = findViewById(R.id.newgame);
+                Button newGameButton, restart, seesol;
+                newGameButton = findViewById(R.id.newgame);
                 restart = findViewById(R.id.restart);
-                seesol= findViewById(R.id.seesolution);
-                newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
+                seesol = findViewById(R.id.seesolution);
+                newGameButton.setVisibility(View.VISIBLE);
+                restart.setVisibility(View.VISIBLE);
+                seesol.setVisibility(View.VISIBLE);
                 clearDim(rootclearDim);
                 popupWindow.dismiss();
-                popupopen = false;
+                isPopUpOpen = false;
                 startChronometer();
             }
         }
     }
 
-    void pauseChronometer() {stopTime = chronometer.getBase() - SystemClock.elapsedRealtime();
-        chronometer.stop();}
+    void pauseChronometer() {
+        stopTime = chronometer.getBase() - SystemClock.elapsedRealtime();
+        chronometer.stop();
+    }
 
-    void resetChronometer() {chronometer.setBase(SystemClock.elapsedRealtime());
-        stopTime = 0;}
+    void startChronometer() {
+        chronometer.setBase(SystemClock.elapsedRealtime() + stopTime);
+        chronometer.start();
+    }
 
-    void startChronometer() {chronometer.setBase(SystemClock.elapsedRealtime() + stopTime);
-        chronometer.start();}
-
-    public void setCurrentTime(Chronometer c , long time) {
+    public void setCurrentTime(Chronometer c, long time) {
         stopTime = time;
         c.setBase(SystemClock.elapsedRealtime() + time);
     }
@@ -536,22 +515,22 @@ public class game extends AppCompatActivity {
     protected void onPause() {
         pauseChronometer();
         ScrollView v = findViewById(R.id.gamescrollview);
-        if(!popupopen && !newameandsol)
-        {
-            Button newgame,restart,seesol;
-            newgame = findViewById(R.id.newgame);
+        if (!isPopUpOpen && !isNewgameOrSolutionPressed) {
+            Button newGameButton, restart, seesol;
+            newGameButton = findViewById(R.id.newgame);
             restart = findViewById(R.id.restart);
-            seesol= findViewById(R.id.seesolution);
-            newgame.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
-            showWinPopupWindow(v,0);
+            seesol = findViewById(R.id.seesolution);
+            newGameButton.setVisibility(View.VISIBLE);
+            restart.setVisibility(View.VISIBLE);
+            seesol.setVisibility(View.VISIBLE);
+            showWinPopupWindow(v, 0);
         }
 
         super.onPause();
     }
 
-    void updateResults()
-    {
-        int win; if(havewon())win=1; else win=0;
-        MainActivity.object.performanceUpdate(MainActivity.object.current_user,moves, ob.moves.get(puzzle),0,level,win,getApplicationContext());
+    void updateResults() {
+        int win = (havewon())?1:0;
+        MainActivity.object.performanceUpdate(MainActivity.object.current_user, moves, ob.moves.get(puzzle), 0, level, win, getApplicationContext());
     }
 }

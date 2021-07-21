@@ -16,7 +16,6 @@ public class setDifficulty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_difficulty);
 
-
         final Button easy,medium,hard;
         easy = findViewById(R.id.easybutton);
         medium = findViewById(R.id.mediumbutton);

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Do something after 5s = 5000ms
+                // Do something after 2s = 2000ms
                 startActivity(new Intent(getApplicationContext(),MainMenu.class));
             }
         }, 2000);

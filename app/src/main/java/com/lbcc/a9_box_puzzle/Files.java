@@ -21,7 +21,7 @@ public class Files {
     //				   	total_score			 0	   0    0
 
     String current_user = "Athe1stB";
-    int difficulty[];
+    int[] difficulty;
     LinkedHashMap<String, String> map;
     LinkedHashMap<String, Integer> moves;
     String[] pattern;
@@ -29,6 +29,16 @@ public class Files {
     public Files() {
         current_user = "";
         difficulty = new int[] {0, 706, 54802, 181440};
+
+        // maximum of(minimum moves to solve the puzzle) is 32
+
+//            moves to solve <=10 then easy,
+//            moves to solve <=20 then medium,
+//            moves to solve <=32 then hard,
+
+//            based on this we have divided the number of the puzzles
+//                0-706 = easy, 705-54802 = medium, 54802-181440 = hard
+
         map = new LinkedHashMap<String, String>();
         moves = new LinkedHashMap<String, Integer>();
         pattern = new String[181440];
@@ -70,7 +80,7 @@ public class Files {
         }
         catch(IOException e)
         {
-            System.out.println("lund mera");
+            System.out.println("Error! Leaderboard not intialized.}");
         }
     }
     public void performanceUpdate(String name, int move, int min_move, int time, int hard, int win, Context context){
@@ -158,7 +168,7 @@ public class Files {
         }
         catch (IOException e)
         {
-            System.out.println("lund");
+            System.out.println("error!");
         }
     }
     public void userUpdate(String name, Context context){
