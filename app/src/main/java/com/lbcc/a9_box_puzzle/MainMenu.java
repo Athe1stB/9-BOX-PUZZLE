@@ -85,11 +85,11 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final TextView rulesButton = findViewById(R.id.rules);
-        rulesButton.setOnClickListener(new View.OnClickListener() {
+        final TextView leaderBoardButton = findViewById(R.id.rules);
+        leaderBoardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rulesButton.startAnimation(myAnim);
+                leaderBoardButton.startAnimation(myAnim);
                 startActivity(new Intent(getApplicationContext(), performanceActivity.class));
             }
         });

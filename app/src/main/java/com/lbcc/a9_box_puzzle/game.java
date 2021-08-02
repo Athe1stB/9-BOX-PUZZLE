@@ -32,16 +32,28 @@ import android.widget.Button;
 
 public class game extends AppCompatActivity {
 
-    Boolean isPopUpOpen = false; //check state of popup(open or close)
-    Boolean isNewgameOrSolutionPressed = false; // to check whether newGameButton/solution pressed or not
+    Boolean isPopUpOpen; //check state of popup(open or close)
+    Boolean isNewgameOrSolutionPressed; // to check whether newGameButton/solution pressed or not
     Button[][] b = new Button[3][3];//these buttons make up the screen
-    int moves = 0;
-    int level = 0;//easy,medium,hard (1,2,3 respectively)
+    int moves;
+    int level; //easy,medium,hard (1,2,3 respectively)
     Files ob = MainActivity.object;
     String puzzle = "";
     int[][] currentPuzzle = new int[3][3]; //current puzzle
     PopupWindow popupWindow;
+    //3 buttons in game interface
+    Button gameNewGameButton, gameSolutionButton, gameResetButton;
 
+    game() {
+        isPopUpOpen = false;
+        isNewgameOrSolutionPressed = false;
+        moves = 0;
+        level = 0;
+        puzzle = "";
+        gameNewGameButton = findViewById(R.id.newgame);
+        gameSolutionButton = findViewById(R.id.seesolution);
+        gameResetButton = findViewById(R.id.restart);
+    }
 
     private static final int[] BUTTON_IDS = {R.id.b1, R.id.b2, R.id.b3, R.id.b4, R.id.b5, R.id.b6, R.id.b7, R.id.b8, R.id.b9,};
     Chronometer chronometer;
@@ -63,13 +75,12 @@ public class game extends AppCompatActivity {
         //to fetch difficulty level from sent intent(from setdifficulty.class)
         Bundle extras = getIntent().getExtras();
         level = extras.getInt("key");
-        
-        final Button seeSolutionButton = findViewById(R.id.seesolution);
-        seeSolutionButton.setOnClickListener(new View.OnClickListener() {
+
+        gameSolutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateResults(); //looking solution means either you gave up or you have won and looking for the best solution. which updates results terminating your ranked gameplay.
-                seeSolutionButton.startAnimation(myAnim);
+                gameSolutionButton.startAnimation(myAnim);
                 isNewgameOrSolutionPressed = true;
                 moves = 0;
                 pauseChronometer();
@@ -87,19 +98,28 @@ public class game extends AppCompatActivity {
             }
         });
 
-        Button newGameButton = findViewById(R.id.newgame);
-        newGameButton.setOnClickListener(new View.OnClickListener() {
+        gameNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateResults();
-                newGameButton.startAnimation(myAnim);
+                gameNewGameButton.startAnimation(myAnim);
                 isNewgameOrSolutionPressed = true;
                 startActivity(new Intent(getApplicationContext(), setDifficulty.class));
                 finish();
             }
         });
 
-        int buttonCounter=0;
+        gameResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameResetButton.startAnimation(myAnim);
+                rand(currentPuzzle);
+                isPopUpOpen = false;
+                play();
+            }
+        });
+
+        int buttonCounter = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 b[i][j] = (Button) findViewById(BUTTON_IDS[buttonCounter]);
@@ -115,18 +135,6 @@ public class game extends AppCompatActivity {
                 currentPuzzle[i][j] = getpuzzle[i][j];
             }
         } //current puzzle
-
-        Button restart = findViewById(R.id.restart);
-        restart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                restart.startAnimation(myAnim);
-                rand(currentPuzzle);
-                isPopUpOpen = false;
-                play();
-            }
-        });
-
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -164,6 +172,8 @@ public class game extends AppCompatActivity {
             pauseChronometer();
             Toast msg = Toast.makeText(getApplicationContext(), "Hurray!! You WON!!", Toast.LENGTH_SHORT);
             msg.show();
+
+            //render all the buttons useless after winning
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     b[i][j].setOnClickListener(new View.OnClickListener() {
@@ -173,21 +183,16 @@ public class game extends AppCompatActivity {
                         }
                     });
                 }
-            } //seize grid;
+            }
 
-            Button newGameButton, restart, seesol;
-            newGameButton = findViewById(R.id.newgame);
-            restart = findViewById(R.id.restart);
-            seesol = findViewById(R.id.seesolution);
-            newGameButton.setVisibility(View.GONE);
-            restart.setVisibility(View.GONE);
-            seesol.setVisibility(View.GONE);
+            gameNewGameButton.setVisibility(View.GONE);
+            gameResetButton.setVisibility(View.GONE);
+            gameSolutionButton.setVisibility(View.GONE);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    // Do something after 5s = 5000ms
                     ScrollView v = findViewById(R.id.gamescrollview);
                     aftersleep(v);
                 }
@@ -273,15 +278,6 @@ public class game extends AppCompatActivity {
         setColor();
     }
 
-    public static void print(String s) {
-        for (int i = 0; i < 9; ++i) {
-            if (s.charAt(i) == '9') System.out.print("  ");
-            else System.out.print(s.charAt(i) + " ");
-            if (i % 3 == 2) System.out.println();
-        }
-        System.out.println();
-    }
-
     public static int[][] strToArr(String s) {
         int[][] a = new int[3][3];
         for (int i = 0; i < 3; ++i)
@@ -293,7 +289,7 @@ public class game extends AppCompatActivity {
     //creates new puzzle from given difficulty level
     int[][] create(int level) {
 
-        int id=0; // puzzle id (initial state)
+        int id = 0; // puzzle id (initial state)
 
         Random rd = new Random();
         while (id == 0) {
@@ -309,6 +305,9 @@ public class game extends AppCompatActivity {
     }
 
     ViewGroup rootclearDim;
+
+    //flag =0 means popUpWindow to be shown when we paused the game.
+    //flag =1 means popUpWindow to be shown when we have won.
 
     public void showWinPopupWindow(final View view, int flag) {
         isPopUpOpen = true;
@@ -348,32 +347,30 @@ public class game extends AppCompatActivity {
         Chronometer timetext = popupView.findViewById(R.id.popuptime);
         setCurrentTime(timetext, stopTime);
 
-        final Button resumebutton = popupView.findViewById(R.id.popupresume);
-        final Button solbutton = popupView.findViewById(R.id.popupsolution);
-        final Button newGameButtonbutton = popupView.findViewById(R.id.popupnewgame);
+        final Button puResumeButton = popupView.findViewById(R.id.popupresume);
+        final Button puSolutionButton = popupView.findViewById(R.id.popupsolution);
+        final Button puNewGameButton = popupView.findViewById(R.id.popupnewgame);
+
         if (flag == 0) {
             LinearLayout l1 = popupView.findViewById(R.id.t1);
             LinearLayout l2 = popupView.findViewById(R.id.t2);
             maint.setText("PAUSED");
-            solbutton.setVisibility(View.GONE);
-            newGameButtonbutton.setVisibility(View.GONE);
+            puSolutionButton.setVisibility(View.GONE);
+            puNewGameButton.setVisibility(View.GONE);
             l1.setVisibility(View.GONE);
             l2.setVisibility(View.GONE);
         } else {
-            resumebutton.setVisibility(View.GONE);
+            puResumeButton.setVisibility(View.GONE);
         }
 
-        resumebutton.setOnClickListener(new View.OnClickListener() {
+        puResumeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resumebutton.startAnimation(myAnim);
-                Button newGameButton, restart, seesol;
-                newGameButton = findViewById(R.id.newgame);
-                restart = findViewById(R.id.restart);
-                seesol = findViewById(R.id.seesolution);
-                newGameButton.setVisibility(View.VISIBLE);
-                restart.setVisibility(View.VISIBLE);
-                seesol.setVisibility(View.VISIBLE);
+                puResumeButton.startAnimation(myAnim);
+                // after clicking resume again bring back all the buttons of the game to visible , start chronometer, close pop up menu
+                gameNewGameButton.setVisibility(View.VISIBLE);
+                gameResetButton.setVisibility(View.VISIBLE);
+                gameSolutionButton.setVisibility(View.VISIBLE);
                 startChronometer();
                 popupWindow.dismiss();
                 clearDim(root);
@@ -381,14 +378,14 @@ public class game extends AppCompatActivity {
             }
         });
 
-        final Button seesolution = popupView.findViewById(R.id.popupsolution);
-        seesolution.setOnClickListener(new View.OnClickListener() {
+        puSolutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // if solution button of popUpMenu clicked. update results. dismiss popUp window, reinitialise all params go to solution window
                 updateResults();
                 popupWindow.dismiss();
                 moves = 0;
-                seesolution.startAnimation(myAnim);
+                puSolutionButton.startAnimation(myAnim);
                 pauseChronometer();
                 Intent sendtosol = new Intent(getApplicationContext(), solution.class);
                 String puzzle = "";
@@ -403,26 +400,14 @@ public class game extends AppCompatActivity {
                 finish();
             }
         });
-/*
-        exitame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateResults();
-                exitame.startAnimation(myAnim);
-                popupWindow.dismiss();
-                startActivity(new Intent(getApplicationContext(),MainMenu.class));
-                finish();
-            }
-        });*/
 
-        final Button newGameButton = popupView.findViewById(R.id.popupnewgame);
-        newGameButton.setOnClickListener(new View.OnClickListener() {
+        puNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateResults();
                 popupWindow.dismiss();
                 clearDim(root);
-                newGameButton.startAnimation(myAnim);
+                puNewGameButton.startAnimation(myAnim);
                 //As an example, display the message
                 Toast.makeText(view.getContext(), "NEW GAME", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), setDifficulty.class);
@@ -430,26 +415,6 @@ public class game extends AppCompatActivity {
                 finish();
             }
         });
-
-        //Handler for clicking on the inactive zone of the window
-        /*restartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isPopUpOpen=false;
-                Button newGameButton,restart,seesol;
-                newGameButton = findViewById(R.id.newgame);
-                restart = findViewById(R.id.restart);
-                seesol= findViewById(R.id.seesolution);
-                newGameButton.setVisibility(View.VISIBLE); restart.setVisibility(View.VISIBLE); seesol.setVisibility(View.VISIBLE);
-                restartButton.startAnimation(myAnim);
-                clearDim(root);
-                rand(currentPuzzle);
-                popupWindow.dismiss();
-                startChronometer();
-                play();
-            }
-        });*/
-
     }
 
     public static void applyDim(@NonNull ViewGroup parent, float dimAmount) {
@@ -472,22 +437,14 @@ public class game extends AppCompatActivity {
         if (!havewon()) {
             if (!isPopUpOpen) {
                 pauseChronometer();
-                Button newGameButton, restart, seesol;
-                newGameButton = findViewById(R.id.newgame);
-                restart = findViewById(R.id.restart);
-                seesol = findViewById(R.id.seesolution);
-                newGameButton.setVisibility(View.GONE);
-                restart.setVisibility(View.GONE);
-                seesol.setVisibility(View.GONE);
+                gameNewGameButton.setVisibility(View.GONE);
+                gameResetButton.setVisibility(View.GONE);
+                gameSolutionButton.setVisibility(View.GONE);
                 showWinPopupWindow(v, 0);
             } else {
-                Button newGameButton, restart, seesol;
-                newGameButton = findViewById(R.id.newgame);
-                restart = findViewById(R.id.restart);
-                seesol = findViewById(R.id.seesolution);
-                newGameButton.setVisibility(View.VISIBLE);
-                restart.setVisibility(View.VISIBLE);
-                seesol.setVisibility(View.VISIBLE);
+                gameSolutionButton.setVisibility(View.VISIBLE);
+                gameResetButton.setVisibility(View.VISIBLE);
+                gameNewGameButton.setVisibility(View.VISIBLE);
                 clearDim(rootclearDim);
                 popupWindow.dismiss();
                 isPopUpOpen = false;
@@ -516,13 +473,9 @@ public class game extends AppCompatActivity {
         pauseChronometer();
         ScrollView v = findViewById(R.id.gamescrollview);
         if (!isPopUpOpen && !isNewgameOrSolutionPressed) {
-            Button newGameButton, restart, seesol;
-            newGameButton = findViewById(R.id.newgame);
-            restart = findViewById(R.id.restart);
-            seesol = findViewById(R.id.seesolution);
-            newGameButton.setVisibility(View.VISIBLE);
-            restart.setVisibility(View.VISIBLE);
-            seesol.setVisibility(View.VISIBLE);
+            gameNewGameButton.setVisibility(View.VISIBLE);
+            gameResetButton.setVisibility(View.VISIBLE);
+            gameSolutionButton.setVisibility(View.VISIBLE);
             showWinPopupWindow(v, 0);
         }
 
@@ -530,7 +483,7 @@ public class game extends AppCompatActivity {
     }
 
     void updateResults() {
-        int win = (havewon())?1:0;
+        int win = (havewon()) ? 1 : 0;
         MainActivity.object.performanceUpdate(MainActivity.object.current_user, moves, ob.moves.get(puzzle), 0, level, win, getApplicationContext());
     }
 }

@@ -43,17 +43,6 @@ public class solution extends AppCompatActivity {
         recursion(puzzle);
         numberOfMoves=-1;
 
-//        while (!puzzle.equals(map.get(puzzle))) //checking whether final state is reached or not
-//            {
-//                //print(puzzle);
-//                int p[][]= strToArr(puzzle);
-//                rand(p);
-//                puzzle = map.get(puzzle);
-//
-//            }
-
-            //print(puzzle);
-
     }
 
     void recursion(final String puzzle) {
@@ -64,7 +53,6 @@ public class solution extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    // Do something after 5s = 5000ms
                     int p[][]= strToArr(puzzle);
                     rand(p);
                     numberOfMoves++;
