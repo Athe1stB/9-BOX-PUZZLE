@@ -28,16 +28,25 @@ public class Files {
     LinkedHashMap<String, int[][]> player;
     public Files() {
         current_user = "";
-        difficulty = new int[] {0, 706, 54802, 181440};
 
-        // maximum of(minimum moves to solve the puzzle) is 32
+        // for index i, difficulty[i] is the number of puzzles that can be solved in upto i moves
+        difficulty = new int[] {1, 3, 7, 15, 31, 51, 90, 152, 268, 420, 706, 1102, 1850, 2874, 4767, 7279, 11764, 17402, 26931, 37809, 54802, 71912, 95864, 116088, 140135, 155713, 170273, 176547, 180457, 181217, 181438, 181440};
 
-//            moves to solve <=10 then easy,
-//            moves to solve <=20 then medium,
-//            moves to solve <=32 then hard,
+        /*
+            maximum of(minimum moves to solve the puzzle) is 31
 
-//            based on this we have divided the number of the puzzles
-//                0-706 = easy, 705-54802 = medium, 54802-181440 = hard
+            Easy:      6 to 9 moves
+            Medium:    10 to 19 moves
+            Hard:      20 to 31 moves
+
+            based on this, number of puzzles taken from difficulty array are
+
+            Easy:    90 - 420        [total 369 puzzles]
+            Medium:  706 - 37809     [total 37389 puzzles]
+            Hard:    54802 - 181440  [total 143631 puzzles]
+
+            Note: puzzles that can be solved in under 5 moves will not be given
+        */
 
         map = new LinkedHashMap<String, String>();
         moves = new LinkedHashMap<String, Integer>();

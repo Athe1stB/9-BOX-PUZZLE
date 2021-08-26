@@ -287,14 +287,21 @@ public class game extends AppCompatActivity {
     }
 
     //creates new puzzle from given difficulty level
-    int[][] create(int level) {
-
-        int id = 0; // puzzle id (initial state)
-
+    int[][] create(Context context, int level) {
+        int moves, id;
         Random rd = new Random();
-        while (id == 0) {
-            id = rd.nextInt(ob.difficulty[level] - ob.difficulty[level - 1]) + ob.difficulty[level - 1];
-        }
+
+        // number of moves for the next puzzle
+        if(level == 1)
+            moves = rd.nextInt(4) + 6;        // 6 to 9 moves
+        else if(level == 2)
+            moves = rd.nextInt(10) + 10;      // 10 to 19 moves
+        else if(level == 3)
+            moves = rd.nextInt(12) + 20;      // 20 to 31 moves
+
+        // random id with that number of moves
+        id = rd.nextInt(ob.difficulty[moves] - ob.difficulty[moves - 1]) + ob.difficulty[moves - 1];
+
         String puzzle = ob.pattern[id];
 
         return strToArr(puzzle);
